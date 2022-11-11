@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 const Pie = () => {
   return (
     <Box m="20px">
-      <Header title="Pie Chart" subtitle="Simple Pie Chart" />
+      <Header title="Harvest" subtitle="Harvest Data Visualisation" />
       <Box height="75vh">
        
       </Box>

@@ -2,16 +2,42 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-
-
+import {useEffect,useState} from 'react'
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 
 
 import StatBox from "../../components/StatBox";
+import React from "preact/compat";
 
 
 const Dashboard = () => {
+  const [statistics, setStatics] = useState({temperature:0,humidity:0,soilmoisture:0})
+  useEffect(() => {
+    fetch("http://sensordatacenter.herokuapp.com/api/v1/latest")
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result["temperature"]) 
+    console.log(result);
+    console.log()
+    setStatics({...result})
+
+    }
+      )
+
+  }, [])
+ 
+
+  useEffect(() => {
+    // console.log("@£$%^&*********************")
+    console.log(statistics)
+
+     
+
+  }, [statistics])
+
+  // {"jan":"23.40","feb":"70.30","marc":"5"}
+ 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -53,15 +79,11 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="25°C"
+            title={statistics.temperature+"°C"}
             subtitle="Temperature"
             progress="0.75"
             increase="+1.5%"
-            icon={
-              <bi bi-thermometer
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
+        
           />
         </Box>
         <Box
@@ -72,7 +94,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="50% RH"
+            title={statistics.humidity+" %RH"}
             subtitle="Humidity"
             progress="0.50"
             increase="+21%"
@@ -102,7 +124,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="30"
+            title={statistics.soilmoisture+"%"}
             subtitle="Soil moisture"
             progress="0.80"
             increase="-3%"

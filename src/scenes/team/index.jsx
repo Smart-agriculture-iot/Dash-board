@@ -18,13 +18,7 @@ const USER = () => {
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
+  
     {
       field: "phone",
       headerName: "Phone Number",

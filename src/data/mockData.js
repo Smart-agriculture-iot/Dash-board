@@ -1,78 +1,38 @@
 import { tokens } from "../theme";
+import {useEffect,useState} from 'react'
+ export let mocDataU="hello";
+
+
+
+
+
+
+
 
 export const mockDataUSER = [
   {
     id: 1,
-    name: "Jon Snow",
-    email: "jonsnow@gmail.com",
-    age: 35,
-    phone: "(665)121-5454",
+    name: "Jackson Ngabonziza",
+    email: "jackson@gmail.com",
+
+    phone: "+250788445849",
     access: "admin",
   },
   {
     id: 2,
-    name: "Cersei Lannister",
-    email: "cerseilannister@gmail.com",
-    age: 42,
-    phone: "(421)314-2288",
+    name: "Uwitonze Claudette",
+    email: "Claudette@gmail.com",
+
+    phone: "+25078855563",
     access: "manager",
   },
   {
     id: 3,
-    name: "Jaime Lannister",
-    email: "jaimelannister@gmail.com",
-    age: 45,
-    phone: "(422)982-6739",
+    name: "Uwamahoro Angelique",
+    email: "Angel@gmail.com",
+    phone: "+2507883553636",
     access: "user",
-  },
-  {
-    id: 4,
-    name: "Anya Stark",
-    email: "anyastark@gmail.com",
-    age: 16,
-    phone: "(921)425-6742",
-    access: "admin",
-  },
-  {
-    id: 5,
-    name: "Daenerys Targaryen",
-    email: "daenerystargaryen@gmail.com",
-    age: 31,
-    phone: "(421)445-1189",
-    access: "user",
-  },
-  {
-    id: 6,
-    name: "Ever Melisandre",
-    email: "evermelisandre@gmail.com",
-    age: 150,
-    phone: "(232)545-6483",
-    access: "manager",
-  },
-  {
-    id: 7,
-    name: "Ferrara Clifford",
-    email: "ferraraclifford@gmail.com",
-    age: 44,
-    phone: "(543)124-0123",
-    access: "user",
-  },
-  {
-    id: 8,
-    name: "Rossini Temperatures",
-    email: "rossiniTemperatures@gmail.com",
-    age: 36,
-    phone: "(222)444-5555",
-    access: "user",
-  },
-  {
-    id: 9,
-    name: "Harvey Roxie",
-    email: "harveyroxie@gmail.com",
-    age: 65,
-    phone: "(444)555-6239",
-    access: "admin",
-  },
+  }
 ];
 
 export const mockDataContacts = [
@@ -202,8 +162,8 @@ export const mockDataContacts = [
 export const mockDataInvoices = [
   {
     id: 1,
-    name: "Jon Snow",
-    email: "jonsnow@gmail.com",
+    name: "Jackson Ngabonziza",
+    email: "jackson@gmail.com",
     cost: "21.24",
     phone: "(665)121-5454",
     date: "03/12/2022",
@@ -216,54 +176,8 @@ export const mockDataInvoices = [
     phone: "(421)314-2288",
     date: "06/15/2021",
   },
-  {
-    id: 3,
-    name: "Jaime Lannister",
-    email: "jaimelannister@gmail.com",
-    cost: "11.24",
-    phone: "(422)982-6739",
-    date: "05/02/2022",
-  },
-  {
-    id: 4,
-    name: "Anya Stark",
-    email: "anyastark@gmail.com",
-    cost: "80.55",
-    phone: "(921)425-6742",
-    date: "03/21/2022",
-  },
-  {
-    id: 5,
-    name: "Daenerys Targaryen",
-    email: "daenerystargaryen@gmail.com",
-    cost: "1.24",
-    phone: "(421)445-1189",
-    date: "01/12/2021",
-  },
-  {
-    id: 6,
-    name: "Ever Melisandre",
-    email: "evermelisandre@gmail.com",
-    cost: "63.12",
-    phone: "(232)545-6483",
-    date: "11/02/2022",
-  },
-  {
-    id: 7,
-    name: "Ferrara Clifford",
-    email: "ferraraclifford@gmail.com",
-    cost: "52.42",
-    phone: "(543)124-0123",
-    date: "02/11/2022",
-  },
-  {
-    id: 8,
-    name: "Rossini Temperatures",
-    email: "rossiniTemperatures@gmail.com",
-    cost: "21.24",
-    phone: "(222)444-5555",
-    date: "05/02/2021",
-  },
+  
+    
 ];
 
 export const mockTransactions = [
@@ -288,85 +202,176 @@ export const mockTransactions = [
 
 ];
 
+
+
+// "11": "185.382",
+//     "1": "72.76",
+//     "12": "126.336",
+//     "2": "56.331",
+//     "3": "106.231",
+//     "4": "131.148",
+//     "5": "112.081",
+//     "6": "124.595",
+//     "7": "93.574",
+//     "8": "37.661",
+//     "9": "185.705",
+//     "10": "220.644"
+
+
+// fetch("http://sensordatacenter.herokuapp.com/api/v1/rainyear/2019")
+//   .then(response => response.json())
+//   .then(result => {
+//     console.log(result)}
+//     )
+
 export const mockBarData = [
   {
-    country: "AD",
-    "hot dog": 137,
+    country: "JAN",
+    "JAN": 72.76,
     "hot dogColor": "hsl(229, 70%, 50%)",
-    burger: 96,
-    burgerColor: "hsl(296, 70%, 50%)",
-    kebab: 72,
-    kebabColor: "hsl(97, 70%, 50%)",
-    donut: 140,
-    donutColor: "hsl(340, 70%, 50%)",
+    Cyuve: 96,
+    Gacaca: "hsl(296, 70%, 50%)",
+    Gashaki: 72,
+    Gataraga: "hsl(97, 70%, 50%)",
+    Kinigi: 140,
+    Muhoza: "hsl(340, 70%, 50%)",
   },
   {
-    country: "AE",
-    "hot dog": 55,
+    country: "FEB",
+    "JAN": 56.331,
     "hot dogColor": "hsl(307, 70%, 50%)",
-    burger: 28,
-    burgerColor: "hsl(111, 70%, 50%)",
-    kebab: 58,
-    kebabColor: "hsl(273, 70%, 50%)",
-    donut: 29,
-    donutColor: "hsl(275, 70%, 50%)",
+    Cyuve: 28,
+    Gacaca: "hsl(111, 70%, 50%)",
+    Gashaki: 58,
+    Muhoza: "hsl(273, 70%, 50%)",
+    Gataraga: 29,
+    Kinigi: "hsl(275, 70%, 50%)",
   },
   {
-    country: "AF",
-    "hot dog": 109,
+    country: "MARCH",
+    "JAN": 106.231,
     "hot dogColor": "hsl(72, 70%, 50%)",
-    burger: 23,
-    burgerColor: "hsl(96, 70%, 50%)",
-    kebab: 34,
-    kebabColor: "hsl(106, 70%, 50%)",
-    donut: 152,
-    donutColor: "hsl(256, 70%, 50%)",
+    Cyuve: 23,
+    Gacaca: "hsl(96, 70%, 50%)",
+    Gashaki: 34,
+    Gataraga: "hsl(106, 70%, 50%)",
+    Kinigi: 152,
+    Muhoza: "hsl(256, 70%, 50%)",
   },
   {
-    country: "AG",
-    "hot dog": 133,
+    country: "APRIL",
+    "JAN": 131.148,
     "hot dogColor": "hsl(257, 70%, 50%)",
-    burger: 52,
-    burgerColor: "hsl(326, 70%, 50%)",
-    kebab: 43,
-    kebabColor: "hsl(110, 70%, 50%)",
-    donut: 83,
-    donutColor: "hsl(9, 70%, 50%)",
+    Cyuve: 52,
+    Gacaca: "hsl(326, 70%, 50%)",
+    Gashaki: 43,
+    Gataraga: "hsl(110, 70%, 50%)",
+    Kinigi: 83,
+    Muhoza: "hsl(9, 70%, 50%)",
   },
   {
-    country: "AI",
-    "hot dog": 81,
+    country: "MAY",
+    "JAN": 112.081,
     "hot dogColor": "hsl(190, 70%, 50%)",
-    burger: 80,
-    burgerColor: "hsl(325, 70%, 50%)",
-    kebab: 112,
-    kebabColor: "hsl(54, 70%, 50%)",
-    donut: 35,
-    donutColor: "hsl(285, 70%, 50%)",
+    Cyuve: 80,
+    CyuveColor: "hsl(325, 70%, 50%)",
+    Gacaca: 112,
+    GacacaColor: "hsl(54, 70%, 50%)",
+    Gashaki: 35,
+    GashakiColor: "hsl(285, 70%, 50%)",
   },
   {
-    country: "AL",
-    "hot dog": 66,
+    country: "JUN",
+    "JAN": 124.595,
     "hot dogColor": "hsl(208, 70%, 50%)",
-    burger: 111,
-    burgerColor: "hsl(334, 70%, 50%)",
-    kebab: 167,
-    kebabColor: "hsl(182, 70%, 50%)",
-    donut: 18,
-    donutColor: "hsl(76, 70%, 50%)",
+    Cyuve: 111,
+    CyuveColor: "hsl(334, 70%, 50%)",
+    Gacaca: 167,
+    GacacaColor: "hsl(182, 70%, 50%)",
+    Gashaki: 18,
+    GashakiColor: "hsl(76, 70%, 50%)",
   },
   {
-    country: "AM",
-    "hot dog": 80,
+    country: "JULY",
+    "JAN": 93.574,
     "hot dogColor": "hsl(87, 70%, 50%)",
-    burger: 47,
-    burgerColor: "hsl(141, 70%, 50%)",
-    kebab: 158,
-    kebabColor: "hsl(224, 70%, 50%)",
-    donut: 49,
-    donutColor: "hsl(274, 70%, 50%)",
+    Cyuve: 47,
+    CyuveColor: "hsl(141, 70%, 50%)",
+    Gacaca: 158,
+    GacacaColor: "hsl(224, 70%, 50%)",
+    Gashaki: 49,
+    GashakiColor: "hsl(274, 70%, 50%)",
+  },
+
+  {
+    country: "AUG",
+    "JAN": 37.661,
+    "hot dogColor": "hsl(87, 70%, 50%)",
+    Cyuve: 47,
+    CyuveColor: "hsl(141, 70%, 50%)",
+    Gacaca: 158,
+    GacacaColor: "hsl(224, 70%, 50%)",
+    Gashaki: 49,
+    GashakiColor: "hsl(274, 70%, 50%)",
+  },
+
+  {
+    country: "SEPT",
+    "JAN": 185.705,
+    "hot dogColor": "hsl(87, 70%, 50%)",
+    Cyuve: 47,
+    CyuveColor: "hsl(141, 70%, 50%)",
+    Gacaca: 158,
+    GacacaColor: "hsl(224, 70%, 50%)",
+    Gashaki: 49,
+    GashakiColor: "hsl(274, 70%, 50%)",
+  },
+  {
+    country: "OCT",
+    "JAN": 220.644,
+    "hot dogColor": "hsl(87, 70%, 50%)",
+    Cyuve: 47,
+    CyuveColor: "hsl(141, 70%, 50%)",
+    Gacaca: 158,
+    GacacaColor: "hsl(224, 70%, 50%)",
+    Gashaki: 49,
+    GashakiColor: "hsl(274, 70%, 50%)",
+  },
+
+  {
+    country: "NOV",
+    "JAN": 185.382,
+    "hot dogColor": "hsl(87, 70%, 50%)",
+    Cyuve: 47,
+    CyuveColor: "hsl(141, 70%, 50%)",
+    Gacaca: 158,
+    GacacaColor: "hsl(224, 70%, 50%)",
+    Gashaki: 49,
+    GashakiColor: "hsl(274, 70%, 50%)",
+  },
+
+  {
+    country: "DEC",
+    "JAN": 185.382,
+    "hot dogColor": "hsl(87, 70%, 50%)",
+    Cyuve: 47,
+    CyuveColor: "hsl(141, 70%, 50%)",
+    Gacaca: 158,
+    GacacaColor: "hsl(224, 70%, 50%)",
+    Gashaki: 49,
+    GashakiColor: "hsl(274, 70%, 50%)",
   },
 ];
+
+
+
+
+
+
+
+
+
+
 
 export const mockPieData = [
   {
@@ -456,6 +461,8 @@ export const mockLineData = [
       },
     ],
   },
+
+
   {
     id: "Temperature",
     color: tokens("dark").blueAccent[300],
