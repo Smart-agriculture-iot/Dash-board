@@ -1,7 +1,7 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-import { mockBarData as data } from "../data/mockData";
+import { mockharvestData as data } from "../data/mockData";
 import {useEffect,useState} from 'react'
 
 const BarChart = ({ isDashboard = false }) => {
@@ -97,7 +97,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "Month", // changed
+        legend: isDashboard ? undefined : "Year", // changed
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -105,7 +105,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "Rain fall in mm", // changed
+        legend: isDashboard ? undefined : "Harvest in tons", // changed
         legendPosition: "middle",
         legendOffset: -40,
       }}
