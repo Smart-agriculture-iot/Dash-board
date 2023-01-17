@@ -7,7 +7,7 @@ import USER from "./scenes/team";
 import Bar from "./scenes/bar";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
+import FAQ from "./scenes/login";
 import LoginActivity from "./scenes/login";
 import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -17,6 +17,15 @@ import { ColorModeContext, useMode } from "./theme";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const Skaford = ({children}) => {
+    return <>
+      <Sidebar isSidebar={isSidebar} />
+      <main className="content">
+                  <Topbar setIsSidebar={setIsSidebar} />
+                  {children}
+                </main>
+    </>
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -24,21 +33,32 @@ function App() {
         <CssBaseline />
         <div className="app">
         
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/USER" element={<USER />} />
-              <Route path="/USER" element={<USER />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
+          <Routes>
+            <Route path="/" element={
+              <Skaford>
+                <Dashboard />
+              </Skaford>
+            
+            } />
+            <Route path="/USER" element={
+              <Skaford><USER /></Skaford>
+            
+            } />
+              <Route path="/USER" element={<Skaford><USER /></Skaford>} />
+              <Route path="/bar" element={<Skaford><Bar /></Skaford>} />
+              <Route path="/pie" element={<Skaford><Pie /></Skaford>} />
+              <Route path="/line" element={<Skaford><Line /></Skaford>} />
+              <Route path="/login" element={
+                <div className="mx-auto">
+                  <FAQ />
+                </div>
+              
+              } />
+              
         
-              <Route path="/geography" element={<Geography />} />
+              <Route path="/geography" element={<Skaford><Geography /></Skaford>} />
             </Routes>
-          </main>
+          
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
