@@ -7,7 +7,7 @@ import React from 'react'
 const Line = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [age, setAge] = React.useState('');
+  const [Year, setAge] = React.useState('');
 
 
   const handleChange = (event) => {
@@ -22,12 +22,12 @@ const Line = () => {
       <Box mb="30px" >
     
       <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Age</InputLabel>
+  <InputLabel id="demo-simple-select-label">Year</InputLabel>
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
-    value={age}
-    label="Age"
+    value={Year}
+    label="Year"
     onChange={handleChange}
   >
     {/* <MenuItem value={10}>2005</MenuItem>

@@ -14,7 +14,7 @@ import React from "preact/compat";
 const Dashboard = () => {
   const [statistics, setStatics] = useState({temperature:0,humidity:0,soilmoisture:0})
   useEffect(() => {
-    fetch("http://10.10.109.85:5000/api/v1/latest")
+    fetch("http://197.243.25.120:5000/api/v1/latest")
     .then(response => response.json())
     .then(result => {
       // console.log(result["temperature"]) 

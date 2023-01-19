@@ -34,7 +34,7 @@ function App() {
         <div className="app">
         
           <Routes>
-            <Route path="/" element={
+            <Route path="/dashboard" element={
               <Skaford>
                 <Dashboard />
               </Skaford>
@@ -48,7 +48,7 @@ function App() {
               <Route path="/bar" element={<Skaford><Bar /></Skaford>} />
               <Route path="/pie" element={<Skaford><Pie /></Skaford>} />
               <Route path="/line" element={<Skaford><Line /></Skaford>} />
-              <Route path="/login" element={
+              <Route path="/" element={
                 <div className="mx-auto">
                   <FAQ />
                 </div>
