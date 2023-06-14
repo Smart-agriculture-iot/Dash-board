@@ -102,10 +102,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Jackson
+                  ADMIN
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Dev 
+                  admin
                 </Typography>
               </Box>
             </Box>
