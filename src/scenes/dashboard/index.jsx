@@ -1,14 +1,14 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import {useEffect,useState} from 'react'
+import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { useEffect, useState } from 'react';
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
+import { mockTransactions } from "../../data/mockData";
+import { tokens } from "../../theme";
 
 
-import StatBox from "../../components/StatBox";
 import React from "preact/compat";
+import StatBox from "../../components/StatBox";
 
 
 const Dashboard = () => {
@@ -19,20 +19,25 @@ const Dashboard = () => {
     return Math.floor(randomNumber); // Remove decimal points
   };
   const [harvestPrediction, setHarvestPrediction] = useState(generateRandomNumber());
-  const [statistics, setStatics] = useState({temperature:0,humidity:0,soilmoisture:0})
+  const [statistics, setStatics] = useState({ temperature: 0, humidity: 0, soilmoisture: 0 });
+
+  const fetchData = () => {
+    fetch("https://rwandasmartagro.rw/backend/api/v1/sensordata/latest")
+      .then((response) => response.json())
+      .then((result) => {
+        setStatics({ ...result });
+      });
+  };
+
   useEffect(() => {
-    fetch("http://197.243.25.120:5000/api/v1/latest")
-    .then(response => response.json())
-    .then(result => {
-      // console.log(result["temperature"]) 
-    console.log(result);
-    console.log()
-    setStatics({...result})
+    fetchData(); // Fetch data when the component mounts
 
-    }
-      )
+    const interval = setInterval(() => {
+      fetchData(); // Fetch updated data every 2 minutes
+    }, 6000); // 120,000 milliseconds = 2 minutes
 
-  }, [])
+    return () => clearInterval(interval); // Clear the interval when the component unmounts
+  }, []);
  
 
   useEffect(() => {
@@ -43,11 +48,11 @@ const Dashboard = () => {
 
   }, [statistics])
 
-  // {"jan":"23.40","feb":"70.30","marc":"5"}
+  // {"jan":"23.40","feb":"70.30","marc":"5"} userName
  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -86,7 +91,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={statistics.temperature+1+"°C"}
+            title={statistics.temperature+"°C"}
             subtitle="Temperature"
             progress="0.75"
             increase="+1.5%"
@@ -116,7 +121,7 @@ const Dashboard = () => {
           justifyContent="center"
         > 
           <StatBox
-            title={statistics.iSraining === 1 ? "True" : "False"}
+            title={statistics.isRaining === "1" ? "True" : "False"}
             subtitle="Raining"
        
            

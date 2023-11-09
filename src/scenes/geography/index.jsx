@@ -2,9 +2,8 @@
 // import GeographyChart from "../../components/GeographyChart";
 // import Header from "../../components/Header";
 // import { tokens } from "../../theme";
-import {useEffect,useState} from 'react'
-import React, { Fragment } from "react";
 import GoogleMapReact from "google-map-react";
+import React, { Fragment, useEffect, useState } from "react";
 
 // const retre = () => {
 //   const theme = useTheme();
@@ -29,7 +28,7 @@ let Geography = () => {
 
     const [statistics, setStatics] = useState({temperature:0,humidity:0,soilmoisture:0})
     useEffect(() => {
-      fetch("http://197.243.25.120:5000/api/v1/latest")
+      fetch("http://localhost:5000/api/v1/latest")
       .then(response => response.json())
       .then(result => {
         // console.log(result["temperature"]) 

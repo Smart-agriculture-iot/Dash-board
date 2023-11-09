@@ -1,10 +1,9 @@
-import AddIcon from '@mui/icons-material/Add';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import DeviceHubIcon from '@mui/icons-material/DeviceHub';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import GrassIcon from '@mui/icons-material/Grass';
 import GridOnIcon from '@mui/icons-material/GridOn';
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -14,7 +13,7 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import SyncLockIcon from '@mui/icons-material/SyncLock';
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -26,6 +25,9 @@ import { tokens } from "../../theme";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
+
   return (
     <MenuItem
       active={selected === title}
@@ -46,10 +48,14 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const accessToken = localStorage.getItem('access_token');
+  const userName = localStorage.getItem('userName');
+  const userRole = localStorage.getItem('userRole');
 
   return (
     <Box
       sx={{
+        height: "100vh",
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -98,37 +104,44 @@ const Sidebar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/images.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
+                <Avatar
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    fontSize: "2.5rem",
+                    backgroundColor: "secondary",
+                  }}
                 >
-                  ADMIN
-                </Typography>
+                  {userName.charAt(0).toUpperCase()}
+                </Avatar>
+              </Box>
+
+              <Box textAlign="center">
+                
+                  <Typography
+                    variant="h2"
+                    color={colors.grey[100]}
+      
+                    sx={{ m: "10px 0 0 0" }}
+                  >
+                    {userName}
+                  </Typography>
+              
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  admin
+                {userRole}
                 </Typography>
               </Box>
             </Box>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            <Item 
               title="Dashboard"
               to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              
             />
             
            <Accordion sx={{
@@ -140,7 +153,7 @@ const Sidebar = () => {
     aria-controls="manage-users-submenu"
     id="manage-users-submenu"
   >
-    {<PeopleOutlinedIcon />}
+    {<PeopleOutlinedIcon style={{ marginRight: '8px' }}/>}
     <Typography>Manage Users</Typography>
   </AccordionSummary>
   <AccordionDetails>
@@ -152,9 +165,17 @@ const Sidebar = () => {
         selected={selected}
         setSelected={setSelected}
       />
-<Item
+      
+           <Item
               title="View Users"
               to="/USER"
+              icon={<GridOnIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            /> 
+            <Item
+              title="View Supervisor"
+              to="/supervisor"
               icon={<GridOnIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -181,14 +202,14 @@ const Sidebar = () => {
     <Menu>
       <Item
         title="Add Cooperative"
-        to="/copregistration"
+        to="/addcoperative"
         icon={<AddBoxRoundedIcon />}
         selected={selected}
         setSelected={setSelected}
       />
 <Item
               title="View cooperatives"
-              to="/cooperatives"
+              to="/viewcoperative"
               icon={<GridOnIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -212,16 +233,10 @@ const Sidebar = () => {
   </AccordionSummary>
   <AccordionDetails>
     <Menu>
-      <Item
-        title="Add Role"
-        to="/copregistration"
-        icon={<AddCircleIcon />}
-        selected={selected}
-        setSelected={setSelected}
-      />
+     
 <Item
               title="View Roles"
-              to="/cooperatives"
+              to="/viewroles"
               icon={<GridOnIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -241,21 +256,48 @@ const Sidebar = () => {
     aria-controls="manage-users-submenu"
     id="manage-users-submenu"
   >
-    <DeviceHubIcon/>
+    <DeviceHubIcon style={{ marginRight: '8px' }}/>
     <Typography>Devices</Typography>
   </AccordionSummary>
   <AccordionDetails>
     <Menu>
-      <Item
-        title="Add Device"
-        to="/copregistration"
-        icon={<AddIcon />}
-        selected={selected}
-        setSelected={setSelected}
-      />
 <Item
               title="View Devices"
-              to="/cooperatives"
+              to="/device"
+              icon={<GridOnIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            /> 
+
+<Item
+              title="Device Tracking"
+              to="/geography"
+              icon={<MapOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />  
+    </Menu>
+  </AccordionDetails>
+</Accordion>
+
+<Accordion sx={{
+    backgroundColor: `${colors.primary[400]} !important`,
+  }}
+  >
+    
+  <AccordionSummary
+    expandIcon={<ExpandMoreIcon />}
+    aria-controls="manage-users-submenu"
+    id="manage-users-submenu"
+  >
+    <GrassIcon style={{ marginRight: '8px' }}/>
+    <Typography>CropCategory</Typography>
+  </AccordionSummary>
+  <AccordionDetails>
+    <Menu>
+<Item
+              title="View Categories"
+              to="/cropcategory"
               icon={<GridOnIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -263,14 +305,26 @@ const Sidebar = () => {
     </Menu>
   </AccordionDetails>
 </Accordion>
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data Visualisation
-            </Typography>
-            <Item
+
+            
+
+
+<Accordion sx={{
+    backgroundColor: `${colors.primary[400]} !important`,
+  }}
+  >
+    
+  <AccordionSummary
+    expandIcon={<ExpandMoreIcon />}
+    aria-controls="manage-users-submenu"
+    id="manage-users-submenu"
+  >
+    <BarChartOutlinedIcon style={{ marginRight: '8px' }}/>
+    <Typography>Data Visualisation</Typography>
+  </AccordionSummary>
+  <AccordionDetails>
+    <Menu>
+    <Item
               title="RainFall Data"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
@@ -291,14 +345,14 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Device Tracking"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
            
+    </Menu>
+  </AccordionDetails>
+</Accordion>
+
+
+
+            
   
 
           </Box>

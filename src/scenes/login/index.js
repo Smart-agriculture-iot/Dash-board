@@ -1,54 +1,58 @@
 // import AdminScaffold from "../../layouts/AdminScaffold";
-import {Link, useNavigate} from "react-router-dom";
-import joi from 'joi';
-import {joiResolver} from "@hookform/resolvers/joi";
-import swal from "sweetalert";
-import {useForm} from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
 import axios from "axios";
+import joi from 'joi';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const fields = {
-    username: joi.string().required(),
-    password: joi.string().required(),
+  username: joi.string().required(),
+  password: joi.string().required(),
 };
 
 const schema = joi.object(fields);
 const LoginActivity = () => {
-    const navigate = useNavigate();
-    const onSubmit = async (query) => {
-        console.log(query)
-        const formData = new FormData();
-        formData.set("username", query["username"])
-        formData.set("password", query.password);
+  const navigate = useNavigate();
 
-        axios.post("http://197.243.25.120:5005/login/token", formData).then(response =>{
-            if(response.status === 200){
-                const {data:access_token} = response;
-                localStorage.setItem("access_token", access_token);
-                navigate("/dashboard")
-            }
-            console.log(response)
-        }).catch(error => {
-            console.error(error)
-            swal('Login fail!', error.response.data.message || 'incorrect username or password', 'error');
-        })
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("https://rwandasmartagro.rw/backend/api/userss/login", {
+        username: data.username,
+        password: data.password,
+      });
+
+      if (response.data && response.data.Token) {
+        const access_token = response.data.Token;
+        localStorage.setItem("access_token", access_token);
+    
+        localStorage.setItem('userId', response.data.Id);
+        localStorage.setItem('userRole', response.data.role);
+        localStorage.setItem('userName', data.username);
+        navigate("/dashboard");
+      } else {
+        console.error("Login failed: Invalid response");
+        swal('Login fail!', 'Incorrect username or password', 'error');
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      swal('Login fail!', error.response?.data?.message || 'An error occurred', 'error');
     }
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        getValues,
-        reset,
-        formState: { errors },
-    } = useForm({
-        resolver: joiResolver(schema),
-    });
+  };
+
+  const {
+    register,
+    handleSubmit,
+  } = useForm({
+    resolver: joiResolver(schema),
+  });
 
     return (
         // <AdminScaffold>
         
-<div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-  <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-  <center><img src="https://static.vecteezy.com/system/resources/thumbnails/004/882/989/small/agriculture-farm-logo-vector.jpg" width="100px" height="100px"></img></center>
+<div className="mt-8 h-[600px] mx-auto flex flex-col items-center rounded-lg  justify-center bg-gray-100">
+  <div className="p-10 xs:p-0 mx-auto md:w-full rounded-lg  md:max-w-md">
+  <center><img src="https://static.vecteezy.com/system/resources/thumbnails/004/882/989/small/agriculture-farm-logo-vector.jpg" width="100px" height="100px"  className="mt-4 rounded-lg" alt="Agriculture Logo"></img></center>
     <h1 className="font-bold text-center text-2xl mb-5 text-black">HINGA WIZEYE </h1>  
     <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
       <form className="px-5 py-7" onSubmit={event => {
@@ -57,12 +61,12 @@ const LoginActivity = () => {
       >
         <label className="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
         <input {...register("username")}
-            type="email" className="border text-black rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+            type="text" className="border text-black rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
         <label className="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
         <input {...register("password")}
             type="password" className="border text-black rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
           <button type="submit" className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block" >
-              <span className="inline-block mr-2 ">Login</span>
+              <span className="inline-block mr-2 " >Login</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -103,7 +107,7 @@ const LoginActivity = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-top">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <span className="inline-block ml-1 text-black ">New user,Register here</span>
+                {/* <span className="inline-block ml-1 text-black ">New user,Register here</span> */}
             </button>
           </div>
         </div>

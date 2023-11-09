@@ -1,21 +1,16 @@
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LanguageIcon from "@mui/icons-material/Language";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import SearchIcon from '@mui/icons-material/Search';
-import {
-  Box,
-  IconButton,
-  InputBase,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import React, { useContext } from 'react';
+import ThreePRoundedIcon from '@mui/icons-material/ThreePRounded';
+import { Box, IconButton, InputBase, Menu, MenuItem, Typography, useTheme } from "@mui/material";
+import React, { useContext, useState } from 'react';
 import { useTranslation } from "react-i18next"; // Import the translation hook
+import { Link } from "react-router-dom";
 import { ColorModeContext, tokens } from "../../theme";
-
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -26,7 +21,15 @@ const Topbar = () => {
     localStorage.removeItem("access_token");
     window.location.href = "/";
   };
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
 
+  const handleMenuOpen = (event) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+  
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+  };
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleLanguageMenuClick = (event) => {
@@ -72,12 +75,26 @@ const Topbar = () => {
           <MenuItem onClick={() => changeLanguage("en")}>English</MenuItem>
           <MenuItem onClick={() => changeLanguage("rw")}>Ikinyarwanda</MenuItem>
         </Menu>
-        <IconButton onClick={handleLogout}>
-          <LogoutOutlinedIcon />
-          <Typography color="red" fontWeight="bold">
+        <IconButton onClick={handleMenuOpen}>
+        <AccountCircleIcon />
+</IconButton>
+<Menu
+  anchorEl={menuAnchorEl}
+  open={Boolean(menuAnchorEl)}
+  onClose={handleMenuClose}
+>
+  <MenuItem onClick={handleLogout}>
+    <LogoutOutlinedIcon style={{ marginRight: '8px' }} />
+    <Typography color="red" fontWeight="bold">
             {t("logout")}
           </Typography>
-        </IconButton>
+  </MenuItem>
+  <MenuItem component={Link} to="/UserProfile" onClick={handleMenuClose}>
+    <ThreePRoundedIcon style={{ marginRight: '8px' }}/>
+    Profile
+  </MenuItem>
+</Menu>
+
       </Box>
     </Box>
   );
