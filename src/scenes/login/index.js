@@ -17,7 +17,7 @@ const LoginActivity = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("https://rwandasmartagro.rw/backend/api/userss/login", {
+      const response = await axios.post("http://rwandasmartagro.rw:8080/api/userss/login", {
         username: data.username,
         password: data.password,
       });
